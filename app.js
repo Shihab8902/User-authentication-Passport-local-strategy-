@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const applyMiddlewares = require("./middlewares");
 const viewRoutes = require("./routes/view");
+const userRoutes = require("./routes/userRoutes");
 
 
 //Middlewares
@@ -11,6 +12,8 @@ applyMiddlewares(app);
 
 //Routes
 app.use(viewRoutes);
+app.use(userRoutes);
+
 
 
 
