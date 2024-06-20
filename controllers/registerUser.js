@@ -13,14 +13,16 @@ const handleRegisterUser = async (req, res) => {
         }
 
         //Hashing and Salting plain password
-        bcrypt.hash(password, 10, function (err, hash) {
+        bcrypt.hash(password, 10, async (err, hash) => {
             if (err) {
                 return res.status(500).send(err.message)
             }
 
-            const newUser = { username, password: hash };
+            const newUser = new userCollection({ username, password: hash });
 
-            res.send(newUser);
+            await newUser.save();
+            res.redirect("/login");
+
         });
 
     }
